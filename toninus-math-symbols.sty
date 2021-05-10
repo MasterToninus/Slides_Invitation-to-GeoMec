@@ -1,0 +1,204 @@
+%-------------------------------------------------------------------------------------------
+%Common math symbols
+%
+%
+%-------------------------------------------------------------------------------------------
+
+%\NeedsTeXFormat{LaTeX2e}[1994/06/01]
+\ProvidesPackage{toninus-math-symbols}[2017/01/13 Custom Package]
+
+\RequirePackage{amssymb}
+\RequirePackage{mathtools}% Loads amsmath
+\RequirePackage{dsfont} % identity symbol
+%\RequirePackage{commath} % consistent symbol of derivation
+\usepackage[only,varoast]{stmaryrd} %circled asterisk
+\usepackage{bbm} %category font
+
+%% 'basic' option
+\DeclareOption{basic}{
+	%Number fields
+		\providecommand{\Real}{\mathbb{R}}
+		\providecommand{\Natural}{\mathbb{N}}
+		\providecommand{\Relative}{\mathbb{Z}}
+		\providecommand{\Rational}{\mathbb{Q}}
+		\providecommand{\Complex}{\mathbb{C}}
+		\providecommand{\KField}{\mathbb{K}}
+
+%equality lingo
+	%must be equal
+		\providecommand{\mbeq}{\overset{!}{=}}
+
+% function
+	%Domain
+		\providecommand{\dom}{\mathit{dom}}
+	%Range
+		\providecommand{\ran}{\mathit{ran}}
+	%Codomain
+		\providecommand{\cod}{\mathit{cod}}
+	%Identity Operator
+		\providecommand{\IdOp}{\mathds{1}}
+	%Identity Map
+		\providecommand{\IdMap}{\textrm{id}}
+	%Identity Element
+		\providecommand{\IdElem}{\mathds{I}}
+
+% Set Theory
+	% Power set (insieme delle parti
+		\providecommand{\PowerSet}{\mathcal{P}}
+
+% Set building
+%% http://math.stackexchange.com/questions/309506/symbol-for-such-that-not-in-set
+		\providecommand{\st}{\quad\vert\quad}
+
+% Linear Algebra
+	\providecommand{\im}{\textrm{im}}
+
+% differential Symbol
+%% https://tex.stackexchange.com/questions/14821/whats-the-proper-way-to-typeset-a-differential-operator
+	\renewcommand{\d}[1]{\ensuremath{\operatorname{d}\!{#1}}}
+	\providecommand{\diff}{\textrm{d}}
+
+}
+
+%% 'TensorAlgebra' option
+\DeclareOption{tensors}{
+	\newcommand{\TensorSpace}{\mathcal{T}}
+}
+
+%% 'Differential Geometry' option
+\DeclareOption{diffgeo}{
+	% Atlas
+		\providecommand{\Atlas}{\mathcal{A}}
+	%support
+		\providecommand{\supp}{\textrm{supp}}
+	%set of tangent fields
+		\providecommand{\FieldSet}{\mathfrak{X}}
+	%external derivative
+		\providecommand{\ExtD}{\diff}
+	%Tangent Map
+		\providecommand{\T}{\textrm{T}}
+	%Lie Derivative
+		\providecommand{\Lie}{\mathcal{L}}%\pounds
+}
+
+%%'Multisymplectic geometry' option
+\DeclareOption{multisym}{
+
+	\providecommand{\AffDualJet}{ J^{1 \TwistedAffine}E }
+	\providecommand{\LinDualJet}{ \overrightarrow{J^{1 \TwistedLinear}E} }
+
+	%twisted dual
+		\providecommand{\TwistedLinear}{\varoast}
+
+	%twisted affine dual
+%https://tex.stackexchange.com/questions/36006/importing-single-symbol-from-mnsymbol
+
+\DeclareFontFamily{U} {MnSymbolC}{}
+
+\DeclareFontShape{U}{MnSymbolC}{m}{n}{
+  <-6> MnSymbolC5
+  <6-7> MnSymbolC6
+  <7-8> MnSymbolC7
+  <8-9> MnSymbolC8
+  <9-10> MnSymbolC9
+  <10-12> MnSymbolC10
+  <12-> MnSymbolC12}{}
+
+\DeclareSymbolFont{MnSyC} {U} {MnSymbolC}{m}{n}
+
+\DeclareMathSymbol{\ostar}{\mathrel}{MnSyC}{102}
+
+		\providecommand{\TwistedAffine}{\ostar}
+
+}
+
+%% 'Category Theory' option
+	%http://katmat.math.uni-bremen.de/acc/acc.pdf
+\DeclareOption{cat}{
+		\providecommand{\cat}[1][C]{\mathbbm{#1}}
+	%Object set
+		\providecommand{\ob}{\mathit{ob}}
+		\providecommand{\Obj}{\mathit{Ob}} %Back-compatibility
+	%collection of arrows between two objects
+		\providecommand{\mor}{hom} %Back-compatibility
+		\providecommand{\hom}{\mathit{hom}}
+	%collection of all the arrows (morphisms) forming the category
+		\providecommand{\Mor}{\mathit{Mor}} %Back-compatibility
+		\providecommand{\Arr}{\mathit{Arr}}
+	%collection of isomorphism between two objects
+		\providecommand{\iso}{\textrm{iso}}
+	%collection of arrows that are iso
+		\providecommand{\Iso}{\mathit{Iso}}
+}
+
+%% 'Geometric Mechanics' option
+\DeclareOption{geomec}{
+	% Kinematic Configurations
+		\providecommand{\Conf}{\mathtt{C}}
+	%Solutions Space
+		\providecommand{\Sol}{\mathtt{Sol}}
+	%Lagrangian class
+		\providecommand{\Lag}{\mathsf{Lag}}
+	%Lagrangian
+		\providecommand{\Lagrangian}{\mathcal{L}}
+	%Hamiltonian
+		\providecommand{\Hamiltonian}{\mathcal{H}}
+	%Data
+		\providecommand{\Data}{\mathsf{Data}}
+	%unique solution map
+		\providecommand{\SolMap}{\mathbf{s}}
+	%Classical Observables
+		\providecommand{\Obs}{\mathcal{E}}
+	%Phase Space
+		\providecommand{\Phase}{\mathcal{M}}
+
+	%Peierls
+		\providecommand{\EffectOp}{\mathbf{D}}
+}
+
+%% 'Algebraic quantum theory' option
+\DeclareOption{aqft}{
+		\providecommand{\ObsAlg}{\mathit{A}}
+}
+
+%% 'Linear partial Differential Operators' option
+\DeclareOption{ldpo}{
+	%Green Operators
+		\providecommand{\GreenRet}{G^+}
+		\providecommand{\GreenAdv}{G^-}
+
+	%Hom bundle
+		\providecommand{\Hom}{\textrm{Hom}}
+}
+
+%% 'General Relativity' option
+\DeclareOption{genrel}{
+	%Chronological Past/Future
+	\providecommand{\ChronoPast}{\mathbf{I}_M^-}
+	\providecommand{\ChronoFut}{\mathbf{I}_M^+}
+	\providecommand{\ChronoPM}{\mathbf{I}_M^\pm}
+
+	%Causal Past/Future
+	\providecommand{\CausalPast}{\mathbf{J}_M^-}
+	\providecommand{\CausalFut}{\mathbf{J}_M^+}
+	\providecommand{\CausalPM}{\mathbf{J}_M^\pm}
+
+	%Set of all cauchy surfaces
+	\providecommand{\CauchyClass}{\PowerSet_C}
+}
+
+%%
+\DeclareOption{all}{
+	\ExecuteOptions{basic,tensors,genrel,ldpo,aqft,geomec,cat,multisym,diffgeo}
+}
+
+%% tells which are the default.
+\ExecuteOptions{basic}
+
+\ProcessOptions\relax
+
+
+
+
+
+\endinput
